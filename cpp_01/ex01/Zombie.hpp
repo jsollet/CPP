@@ -10,14 +10,15 @@ class Zombie
 		Zombie(); // constructeur par défaut
 		Zombie(std::string name); //constructeur parametré
 		~Zombie();
-		void	announce(void);// public sinon impossible depuis main ?
+		// getter
+		void	announce(void) const;
+		// setter
+		void	setName(std::string name);
 
 	private:
 		std::string	name;
 };
 
 Zombie* zombieHorde( int N, std::string name );
-Zombie	*newZombie(std::string name);
-void	randomChump(std::string name);
 
 #endif
