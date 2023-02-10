@@ -34,8 +34,10 @@ bool	test(int argc, char *argv[])
 
 void	replace(std::ifstream& file_1, std::ofstream& file_2, std::string& read, const std::string s1, const std::string s2 )
 {
-	while (std::getline(file_1, read))
-	{
+//	while (std::getline(file_1, read))
+	
+	(void)file_1;
+
 		size_t pos = read.find(s1);
 		if ( pos == std::string::npos)
 		{
@@ -59,8 +61,8 @@ void	replace(std::ifstream& file_1, std::ofstream& file_2, std::string& read, co
 			}
 		file_2 << std::endl;
 		}
-	}
 }
+
 
 int	main(int argc, char *argv[])
 {
@@ -69,14 +71,12 @@ int	main(int argc, char *argv[])
 	if (test(argc, argv))
 	{
 		const std::string	s1 = argv[2];
-		 std::string 	f_name= argv[1];
-//		const size_t		s1_len = s1.length();
+		std::string 		f_name= argv[1];
 		const std::string	s2 = argv[3];
 		std::ifstream file_1(argv[1]);
-//		std::ofstream file_2(argv[1] + file_extension);
-		std::ofstream file_2;//
+		std::ofstream file_2;
 		f_name.append(".replace");
-		file_2.open(f_name.data());//
+		file_2.open(f_name.data());
 		if (!file_2)
 		{
 			std::cerr << "error writing file " << std::endl;
@@ -87,30 +87,7 @@ int	main(int argc, char *argv[])
 		while (std::getline(file_1, read))
 		{
 			replace(file_1, file_2, read, s1, s2);
-/*			size_t pos = read.find(s1);
-			if ( pos == std::string::npos)
-			{
-				file_2 << read << std::endl;
-			}
-			else
-			{
-				while(read.length())
-				{
-					pos = read.find(s1);
-					file_2 << read.substr(0, pos);
-					if (pos != std::string::npos )
-					{
-						file_2 << s2;	
-						read = read.substr(pos + s1_len, std::string::npos);
-					}
-					else
-					{
-						read = "";
-					}
-				}
-			file_2 << std::endl;
-			}
-*/		}
+		}
 		file_1.close();
 		file_2.close();
 		return (EXIT_SUCCESS);
