@@ -1,12 +1,11 @@
 NAME =	Fixed_02
 
-# CC =  c++-12
-CC = g++
+CC =  c++-12
 
 RM = 		@rm -rf
 
 
-FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic
+FLAGS = -g -Wall -Werror -Wextra -fsanitize=address  -std=c++98 -pedantic
 
 CFILES =	main.cpp \
 			Fixed.cpp \
