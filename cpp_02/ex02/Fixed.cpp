@@ -2,32 +2,26 @@
 
 Fixed::Fixed()
 {
-//	std::cout << "Default constructor called" << std::endl;
 	this->store = 0;
 }
-// pas sur...entier cte pas ref entier cte
+
 Fixed::Fixed(const int a)
-{// faut il <<fixed::b ?
-//	std::cout << "Int constructor called" << std::endl;
+{
 	this->store = a << Fixed::b;
 }
-// faut-il mettre roundf() ? voir remarque dessus
+
 Fixed::Fixed(const float a)
 {
-//	std::cout << "Float constructor called" << std::endl;
 	this->store = roundf(a* std::pow(2, Fixed::b));
 }
-// est-ce qu'il faut constructeur copie avec Fixed
+
 Fixed::Fixed(const Fixed& fixed)
 {
-//	std::cout << "Copy constructor called" << std::endl;
 	this->store = fixed.getRawBits();
 }
 
-//  ??
 Fixed	&Fixed::operator=(const Fixed& rhs)
 {
-//	std::cout << "Copy assignment operator called" << std::endl;
 	this->store = rhs.getRawBits();
 	return *this;
 }
@@ -37,7 +31,7 @@ std::ostream	&operator<<(std::ostream &os, Fixed const& rhs)
 	os << rhs.toFloat();
 	return (os);
 }
-// arithm op
+
 Fixed	Fixed::operator+(const Fixed& rhs) const
 {
 	Fixed result(this->toFloat() + rhs.toFloat());
@@ -47,24 +41,24 @@ Fixed	Fixed::operator+(const Fixed& rhs) const
 
 Fixed	Fixed::operator-(const Fixed& rhs) const
 {
-	Fixed result(this->toFloat() + rhs.toFloat());
+	Fixed result(this->toFloat() - rhs.toFloat());
 	return (result);
 }
 
 Fixed	Fixed::operator*(const Fixed& rhs) const
 {
 	Fixed result(this->toFloat() * rhs.toFloat());
-	return (result); // ??
+	return (result);
 }
 
 Fixed	Fixed::operator/(const Fixed& rhs) const
 {
 	Fixed result(this->toFloat() / rhs.toFloat());
-	return (result); // ??
+	return (result);
 }
+
 Fixed::~Fixed()
 {
-//	std::cout << "Destructor called" << std::endl;
 }
 
 bool	Fixed::operator<(const Fixed& rhs) const
@@ -98,7 +92,6 @@ bool	Fixed::operator!=(const Fixed& rhs) const
 	return (this->store != rhs.store);
 }
 
-// increment ??
 Fixed	&Fixed::operator++()
 {
 	++store;
@@ -111,7 +104,7 @@ Fixed	Fixed::operator++(int)
 	operator++();
 	return (tmp);
 }
-// decrement
+
 Fixed	&Fixed::operator--()
 {
 	--store;
@@ -124,8 +117,7 @@ Fixed	Fixed::operator--(int)
 	operator--();
 	return (tmp);
 }
-// static min et max a voir si & ou pas ?
-// avant lhs.getRawBits()
+
 Fixed	Fixed::min(Fixed &lhs, Fixed &rhs)
 {
 	if (lhs < rhs)
@@ -160,14 +152,12 @@ Fixed	const Fixed::max(const Fixed &lhs,const Fixed &rhs)
 
 int		Fixed::getRawBits(void) const
 {
-//	std::cout << "getRawBits member function called" << std::endl;
 	return Fixed::store;
 }
-// ??*******************3a modifier avant aussi ***********************
+
 void	Fixed::setRawBits(int const raw)
 {
-//	std::cout << "setRawBits member function called" << std::endl;
-	this->store = raw;// << Fixed::b;
+	this->store = raw;
 }
 
 int		Fixed::toInt(void) const
