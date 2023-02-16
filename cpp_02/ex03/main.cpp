@@ -4,27 +4,15 @@
 
 int main( void )
 {
-	const Point a(2.4f, 0.f);
-	Point b(2.4f, 2.f);
-	Point c = b;
-  //
-  //	c = b;
-	Fixed x, y;
-	x = a.getX();
-	y = a.getY();
-	std::cout<< c.getX() << "  " << c.getY() << std::endl;
-
-	std::cout<< Fixed(10)*x << " <-x, y->  " << Fixed(10)*y << std::endl;
-	Point d = translate(a, b);
-	
-	std::cout<< d.getX() << " <-x, y->  " << d.getY() << std::endl;
-	std::cout<< "test cross product \n" << std::endl;
-	std::cout<< cross(a,b) << "axb   bxa" << cross(b,a)<<std::endl;
-	std::cout<< cross(a,a) << "axa" << std::endl;
-	
-	
-	
-	
-	
+	std::cout << std::boolalpha;
+	std::cout<< " Test bsp: p sur sommet A " << std::endl;
+	std::cout << bsp(Point(0.0f,0.0f), Point(4, 0), Point(4,4), Point(0,0)) << std::endl; ;
+	std::cout<< " Test bsp: p sur arete AC " << std::endl;
+	std::cout << bsp(Point(0.0f,0.0f), Point(4, 0), Point(4,4), Point(2,2)) << std::endl; ;
+	std::cout << " Test bsp: hors ABC" << std::endl;
+	std::cout << bsp(Point(0.0f,0.0f), Point(4, 0), Point(4,4), Point(12,2))<< std::endl ;
+	std::cout << " Test bsp: p interieur " << std::endl;
+	std::cout << bsp(Point(0.0f,0.0f), Point(4, 0), Point(4,4), Point(2,1)) << std::endl;;
+	std::cout << std::noboolalpha <<std::endl;	
 	return 0;
 }

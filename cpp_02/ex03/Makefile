@@ -1,4 +1,4 @@
-NAME =	Fixed_02
+NAME =	BSP
 
 CC =  c++-12
 
@@ -10,6 +10,7 @@ FLAGS = -g -Wall -Werror -Wextra  -std=c++98 -pedantic
 CFILES =	main.cpp \
 			Fixed.cpp \
 			Point.cpp \
+			bsp.cpp \
 
 OBJECTS = 	$(CFILES:.cpp=.o)
 
