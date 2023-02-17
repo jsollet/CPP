@@ -7,13 +7,12 @@ class Fixed
 {
 	public:
 		Fixed();
-		Fixed(const Fixed &f);// ?constructeur de copie
-		Fixed(const int a);// est-ce juste ?
-		Fixed(const float f); //ces 2 la^^^des constructeurs de recopie
-		Fixed &operator=(const Fixed& rhs);//attn d'autres modele existent 
-		~Fixed();// verifie coplien ?
-		//https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom#3279550
-		// v.p 142 c++ tour
+		Fixed(const Fixed &f);
+		Fixed(const int a);
+		Fixed(const float f);
+		Fixed &operator=(const Fixed& rhs); 
+		~Fixed();
+		
 		Fixed operator+(const Fixed& rhs) const;
 		Fixed operator-(const Fixed& rhs) const;
 		Fixed operator*(const Fixed& rhs) const;
@@ -25,10 +24,9 @@ class Fixed
 		bool operator<=(const Fixed& rhs) const;
 		bool operator==(const Fixed& rhs) const;
 		bool operator!=(const Fixed& rhs) const;
-	// prefix and postfix increment
+		
 		Fixed &operator++();
 		Fixed operator++(int);
-	// prefix and postfix decrement
 		Fixed &operator--();
 		Fixed operator--(int);
 		
@@ -36,7 +34,7 @@ class Fixed
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
-	// les fonction statiques... A VERIFIER:bien lire... (surrout retour ?
+		
 		static Fixed		min(Fixed &lhs, Fixed &rhs);
 		const static Fixed	min(const Fixed &lhs, const Fixed &rhs);
 		static Fixed		max(Fixed &lhs, Fixed &rhs);

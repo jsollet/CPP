@@ -7,12 +7,10 @@ class Fixed
 {
 	public:
 		Fixed();
-		Fixed(const Fixed &f);// ?
-		Fixed(const int& a);// est-ce juste ?
-		Fixed(const float& f); //ces 2 la^^^des constructeurs de recopie
-		Fixed &operator=(const Fixed& rhs);//attn d'autres modele existent 
-		//https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom#3279550
-		// v.p 142 c++ tour
+		Fixed(const Fixed &f);
+		Fixed(const int& a);
+		Fixed(const float& f);
+		Fixed &operator=(const Fixed& rhs); 
 		~Fixed();
 
 		int		getRawBits(void) const;
@@ -24,6 +22,7 @@ class Fixed
 		int					store;
 		const static	int	b = 8;
 };
+		
+	std::ostream &operator<<(std::ostream& os, Fixed const& rhs);
 
-		std::ostream &operator<<(std::ostream& os, Fixed const& rhs);
 #endif

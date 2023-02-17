@@ -6,7 +6,9 @@ int main( void )
 	Fixed a;
 	Fixed b( a );
 	Fixed c;
-	c = 1.44f;
+	
+	c = b;
+	
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;

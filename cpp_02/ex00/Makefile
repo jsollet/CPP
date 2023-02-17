@@ -1,7 +1,6 @@
 NAME =	Fixed_00
 
-# CC =  c++-12
-CC = g++
+CC =  c++-12
 
 RM = 		@rm -rf
 
