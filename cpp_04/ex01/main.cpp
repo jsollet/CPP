@@ -21,65 +21,22 @@ int main()
 	std::cout << "Cat " << i->getType() << " " << std::endl;
 	std::cout << "Dog " << j->getType() << " " << std::endl;
 	std::cout << "Meta " << meta->getType() << " " << std::endl;
-	std::cout << std::endl << "------------ test sound -------------" << std::endl;
+/*	std::cout << std::endl << "------------ test sound -------------" << std::endl;
 	i->makeSound();
 	j->makeSound();
 	meta->makeSound();
 	std::cout << std::endl << "------------ test destructor -------------" << std::endl;
-	delete(meta);
+*/	delete(meta);
 	delete(j);
 	delete(i);
 
 	std::cout << std::endl << "------------ test animal -------------" << std::endl;
-	Animal A0("Alien");
 	const Animal *A1 = new Animal("Bestiole 1");
 	const Animal *A2 = new Animal("Bestiole 2");
-	const Animal *A3(A1);// n'appelle aucun constructeur?
-	printf("A3 address = %p\n", (void *)A3);
 	const Animal *A5 = new Cat("Felix", "I am hungry");
 	const Animal *A6 = new Dog("Pluto", "Bones, Bones,...");
-	Animal A7("Minou");
 	const Cat *B1 = new Cat("Biscotte", "Would ate a mice ");
-//	Cat B2("Lucifer", "Would like to play"); // LEAK
-	const Cat *B2 = new Cat("Lucifer", "Would like to play"); // LEAK
 	const Dog *D1 = new Dog("Rintintin", "Tired to be a good dog");
-	Dog D2("Milou", " I hate Haddock ");
-//	B2.makeSound();
-	std::cout << std::endl << "------------ test copy constructor  -------------" << std::endl;
-	const Animal A4(*A2);
-	const Cat B3(*B1);
-	const Dog D3(*D1);
-	Cat B4(*B2);
-	B4=*B1;
-	std::cout<<red;
-	Cat CC;
-	CC = *B2;
-	std::cout<<reset;
-	std::cout << std::endl << "------------ test operator (diff class)  -------------" << std::endl;
-	A7 = *D1;
-//	A7 = B2;
-//	A7 = *B2;
-//	B2 = *D1;
-//	D1 = *A2;
-	std::cout << std::endl << "------------ test operator (same class) -------------" << std::endl;
-	A0 = *A2;
-//	B2 = B1;
-//	B2 = B1;
-	D2 = *D1;
-	std::cout << std::endl << "------------ test animal  sound  -------------" << std::endl;
-	A1->makeSound();
-	A2->makeSound();
-	A3->makeSound();
-	A5->makeSound();
-	A6->makeSound();
-	A7.makeSound();
-	std::cout << std::endl << "------------ test Wrong (no virtual sound) -------------" << std::endl;
-	std::cout << "------------ test WrongAnimal = new WrongCat -------------" << std::endl;
-	const WrongAnimal *WA = new WrongCat();
-	WA->makeSound();
-	std::cout << "------------ test WrongCat = new WrongCat -------------" << std::endl;
-	const WrongCat *WC = new WrongCat();
-	WC->makeSound();
 	std::cout << "------------ test exo 1 -------------" << std::endl;
 	std::cout<<red;
 	const Animal* j1 = new Dog();
@@ -87,15 +44,80 @@ int main()
    	delete j1;
 	delete i1;
 	std::cout<<reset;
+	Animal	*animal[12];
+	for (int i = 0;i < 12; i++)
+	{
+		if (i % 2 == 0)
+			animal[i] = new Cat();
+		else
+			animal[i] = new Dog();
+	}//https//:github.com/lschrafstetter/42_cpp04/blob/master/ex01/main.cpp
+	for (int i = 0; i < 12; i++)
+	{
+		std::cout << i<< "     " <<animal[i]->getType();
+		animal[i]->makeSound();
+		std::cout<<std::endl;
+	}
+	std::cout << std::endl << "------------ Cat *Maxi = new Cat(*Felix) ------------------"<<std::endl;
+	std::cout << "------------ before copy : Felix.idea <-- [ idea  nb...]  ------------------"<< std::endl;
+	std::cout << "------------ after copy : Felix.idea <-- [new idea of Felix nb...]  ------------------"<< std::endl;
+	Cat *Felix = new Cat("Felix", "");
+
+	for (int i = 0; i < 12; i++)
+	{
+		std::string s="Idea nb ";
+		s += std::to_string(i);
+		Felix->getBrain()->setIdea(i, s);
+//		std::cout << i << "  " << Felix->getBrain()->getIdea(i) << std::endl;
+	}
+	Cat *Maxi = new Cat(*Felix);
+	for (int i = 0; i < 12; i++)
+	{
+		std::string s="new idea of Felix nb ";
+		s += std::to_string(i);
+		Felix->getBrain()->setIdea(i, s);
+//		std::cout << i << "  " << Felix->getBrain()->getIdea(i) << std::endl;
+	}
+	for (int i= 0; i< 12; i++)
+	{
+		std::cout << i << " Felix : " << Felix->getBrain()->getIdea(i);
+		std::cout << "\t Maxi : " << Maxi->getBrain()->getIdea(i) << std::endl;
+
+	}
+
+	std::cout << std::endl<< "------------  *Tigrou = *Felix ------------------"<< std::endl;
+	std::cout << "------------ after = : Felix.idea <-- [old idea of Felix nb...]  ------------------"<< std::endl;
+	Cat *Tigrou = new Cat("Tigrou", "");
+
+	*Tigrou  = *Felix;
+	for (int i = 0; i < 12; i++)
+	{
+		std::string s="old idea of Felix nb ";
+		s += std::to_string(i);
+		Felix->getBrain()->setIdea(i, s);
+//		std::cout << i << "  " << Felix->getBrain()->getIdea(i) << std::endl;
+	}
+	for (int i= 0; i< 12; i++)
+	{
+		std::cout << i << " Felix : " << Felix->getBrain()->getIdea(i);
+		std::cout << "\t Tigrou: " << Tigrou->getBrain()->getIdea(i) << std::endl;
+
+	}
+
+	delete(Tigrou);
+	delete(Felix);
+	delete(Maxi);
+	for (int i = 0; i < 12; i++)
+	{
+		delete (animal[i]);
+	}	
+	
 	delete(A1);
 	delete(A2);
 	delete(A5);
 	delete(A6);
 	delete(B1);
-	delete(B2);// pb malloc car ligne 66 efface B2 !!
 	delete(D1);
-	delete(WA);
-	delete(WC);
 	std::cout << "------------ FIN -------------" << std::endl;
 	return 0;
 }

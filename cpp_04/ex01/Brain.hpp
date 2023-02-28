@@ -13,6 +13,7 @@ class	Brain
 		~Brain();
 		
 		std::string	getIdea(int index) const;
+		void		setIdea(int index, std::string idea);
 	private:
 		static const int	size = 100;
 		std::string	ideas[size];

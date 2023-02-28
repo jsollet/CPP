@@ -13,7 +13,8 @@ class	Cat: public Animal
 		Cat(const Cat &Cat);
 		Cat &operator=(const Cat &rhs);
 		~Cat();
-
+		
+		Brain*	getBrain() const;
 		void	makeSound() const;
 	private:
 		Brain*	catBrain;// a voir

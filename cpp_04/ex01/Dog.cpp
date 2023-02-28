@@ -20,11 +20,14 @@ Dog::Dog(const Dog &rhs): Animal(rhs)
 
 Dog	&Dog::operator=(const Dog &rhs)
 {
-	std::cout << std::endl << "(Dog) Operator = : " << this->type << " = ";
-	std::cout << rhs.getType() << std::endl;
-	delete (this->dogBrain);
-	this->type = rhs.getType();
-	this->dogBrain = new Brain(*rhs.dogBrain);
+	if (this != &rhs)
+	{
+		std::cout << std::endl << "(Dog) Operator = : " << this->type << " = ";
+		std::cout << rhs.getType() << std::endl;
+		delete (this->dogBrain);
+		this->type = rhs.getType();
+		this->dogBrain = new Brain(*rhs.dogBrain);
+	}
 	return (*this);
 }
 
@@ -32,6 +35,11 @@ Dog::~Dog()
 {
 	delete (this->dogBrain);
 	std::cout << "Destructor  Dog " << this->type << std::endl;
+}
+
+Brain*	Dog::getBrain() const
+{
+	return (this->dogBrain);
 }
 
 void	Dog::makeSound() const
