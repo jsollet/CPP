@@ -1,4 +1,4 @@
-NAME =	Brain_poly
+NAME = Abstract
 
 # CC =  c++-12
 CC = g++

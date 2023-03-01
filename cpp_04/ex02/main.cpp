@@ -9,7 +9,7 @@
 
 int main()
 {
-	const Animal* meta = new Animal();
+//	const Animal* meta = new Animal();//pure virtual
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	const std::string red("\033[0;31m");
@@ -24,14 +24,14 @@ int main()
 	std::cout << std::endl << "------------ test getType -------------" << std::endl;
 	std::cout << "Cat " << i->getType() << " " << std::endl;
 	std::cout << "Dog " << j->getType() << " " << std::endl;
-	std::cout << "Meta " << meta->getType() << " " << std::endl;
-	delete(meta);
+//	std::cout << "Meta " << meta->getType() << " " << std::endl;
+//	delete(meta);
 	delete(j);
 	delete(i);
 
 	std::cout << std::endl << "------------ test animal -------------" << std::endl;
-	const Animal *A1 = new Animal("Bestiole 1");
-	const Animal *A2 = new Animal("Bestiole 2");
+//	const Animal *A1 = new Animal("Bestiole 1");
+//	const Animal *A2 = new Animal("Bestiole 2");
 	const Animal *A5 = new Cat("Felix", "I am hungry");
 	const Animal *A6 = new Dog("Pluto", "Bones, Bones,...");
 	const Cat *B1 = new Cat("Biscotte", "Would ate a mice ");
@@ -55,8 +55,8 @@ int main()
 		animal[i]->makeSound();
 		std::cout<<std::endl;
 	}
-	delete(A1);
-	delete(A2);
+//	delete(A1);
+//	delete(A2);
 	delete(A5);
 	delete(A6);
 	delete(B1);
