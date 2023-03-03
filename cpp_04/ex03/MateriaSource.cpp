@@ -22,7 +22,7 @@ MateriaSource::MateriaSource(const MateriaSource &ms)
 
 MateriaSource	&MateriaSource::operator=(const MateriaSource &rhs)
 {
-	if (this != rhs)
+	if (this != &rhs)
 	{
 		for (int i = 0; i < MateriaSource::size; i++)
 		{
@@ -48,3 +48,33 @@ MateriaSource::~MateriaSource()
 			delete (this->MatSource[i]);
 	}
 }
+
+void		MateriaSource::learnMateria(AMateria *matiera)
+{
+	int i = 0;
+	while (i< MateriaSource::size)
+	{
+		if (this->MatSource[i] == NULL)
+		{
+			this->MatSource[i] = matiera;
+			std::cout << "Learning done..." << std::endl;
+			break;
+		}
+		i++;
+	}
+}
+
+AMateria	*MateriaSource::createMateria(std::string const &type)
+{
+	int i = 0;
+	while (i < MateriaSource::size)
+	{
+		if (this->MatSource[i] && this->MatSource[i]->getType() == type)
+		{
+			std::cout << "Materia source created..." << std::endl;
+			return (this->MatSource[i]->clone());
+		}
+		i++;
+	}
+	return (NULL);
+}	

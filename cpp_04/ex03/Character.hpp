@@ -15,7 +15,6 @@ class Character: public ICharacter
 		Character &operator=(const Character &rhs);
 		~Character();
 
-		// def des virtuals de ICharacter...
 		std::string const	&getName() const;
 		void				equip(AMateria *m);
 		void				unequip(int idx);
@@ -25,11 +24,9 @@ class Character: public ICharacter
 	private:
 		std::string			name;
 		static const int	size = 4;
-		AMateria			*stock[size];// peut etre mieux un ptri
+		AMateria			*stock[size];
 
-	static int				instance_def;
-	static int				instance_par;
-	static int				instance_cpy;
+	static int				instance;
 	static AMateria			*left[100];
 };
 

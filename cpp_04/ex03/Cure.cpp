@@ -2,9 +2,6 @@
 #include <iostream>
 #include <string>
 
-// peut etre pas besoin du constructeur parametré...
-// ice n'a pas d'attribut..
-
 Cure::Cure():AMateria("cure")
 {
 	std::cout << "Default constructor Cure" << std::endl;
@@ -35,8 +32,7 @@ Cure::~Cure()
 	std::cout << "Destructor  Cure" << std::endl;
 }
 
-// cree une nvlle instancei (ptr) dont le contenu est celui de l'original
-Amateria	*Cure::clone() const
+AMateria	*Cure::clone() const
 {
 	return(new Cure(*this));
 }

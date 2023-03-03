@@ -2,9 +2,6 @@
 #include <iostream>
 #include <string>
 
-// peut etre pas besoin du constructeur parametré...
-// ice n'a pas d'attribut..
-
 Ice::Ice():AMateria("ice")
 {
 	std::cout << "Default constructor Ice" << std::endl;
@@ -35,8 +32,7 @@ Ice::~Ice()
 	std::cout << "Destructor  Ice" << std::endl;
 }
 
-// cree une nvlle instancei (ptr) dont le contenu est celui de l'original
-Amateria	*Ice::clone() const
+AMateria	*Ice::clone() const
 {
 	return(new Ice(*this));
 }

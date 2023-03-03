@@ -2,19 +2,16 @@
 # define IMATERIASOURCE_HPP
 #include <iostream>
 #include <string>
-#include "Amateria.hpp"
+#include "AMateria.hpp"
 
-// pas sur...
-// Abstract class --> pas de definition (pas de .cpp) !
+class AMateria;
 
 class IMateriaSource
 {
 	public:
-		virtual 			~ImateriaSource() {};
+		virtual 			~IMateriaSource() {}
 		virtual void		learnMateria(AMateria*) = 0;
 		virtual AMateria*	createMateria(std::string const & type) = 0;
-
-
 	private:
 
 };

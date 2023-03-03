@@ -2,7 +2,13 @@
 # define AMATERIA_HPP
 #include <iostream>
 #include <string>
-#include "ICharacter.hpp"
+#include "Character.hpp"
+
+
+class ICharacter;
+class Character;
+class IMateriaSource;
+class MateriaSource;
 
 class AMateria
 {
@@ -11,21 +17,16 @@ class AMateria
 	AMateria(const std::string name);
 	AMateria(const AMateria &mat);
 	AMateria &operator=(const AMateria &rhs);
-	~AMateria();
-	// a completer
+	virtual ~AMateria();
 	
-	std::string const	&getType() const;// est-ce le name ?
+	std::string const	&getType() const;
 
-	virtual AMateria		*clone() const = 0;// defini plus tard, AMateria abst
-	virtual void			use(ICharacter &target);// nvelle interface classe...
+	virtual AMateria		*clone() const = 0;
+	virtual void			use(ICharacter &target) = 0;
 
 	protected:
 		std::string		name;
-
-	// a completer
 };
 
 
 #endif
-
-// clone et use definit dans Ice et Cure

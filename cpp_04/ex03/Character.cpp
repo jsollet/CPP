@@ -1,9 +1,7 @@
 #include "Character.hpp"
 
-	int	instance_def = 0;
-	int	instance_par = 0;
-	int	instance_cpy = 0;
-	Amateria *left = {};
+	int Character::instance = 0;
+	AMateria *Character::left[100] = {NULL};
 
 Character::Character(): name("")
 {
@@ -11,9 +9,9 @@ Character::Character(): name("")
 	{
 		Character::stock[i] = NULL;
 	}
-	instance_def++;
+	instance++;
 	std::cout << "Default constructor Character" << std::endl;
-	std::cout << "Number of Default constructor call = "<<instance_def << std::endl
+	std::cout << "Number of remaining instance = "<<instance << std::endl;
 }
 
 Character::Character(const std::string Name): name(Name)
@@ -22,43 +20,48 @@ Character::Character(const std::string Name): name(Name)
 	{
 		Character::stock[i] = NULL;
 	}
-	instance_par++;
+	instance++;
 	std::cout << "Param constructor Character" << std::endl;
-	std::cout << "Number of par constructor call = "<<instance_par << std::endl
+	std::cout << "Number of remaining instance = "<<instance << std::endl;
 }
 
 Character::Character(const Character &character): name(character.getName())
 {
 	for (int i = 0; i < Character::size; i++)
-	{// A<--B Pas sur qu'il faut effecer...
-	// effacement A (suppose ont été new...
+	{
+		Character::stock[i] = NULL;
+	}
+/*	for (int i = 0; i < Character::size; i++)
+	{
 		if (this->stock[i])
 			delete (this->stock[i]);
 	}
-	for (int i = 0; i < Character::size; i++)
+*/	for (int i = 0; i < Character::size; i++)
 	{
-	// clonage... B-->A (si non null)
-	// clone dans Ice ou Cure...
 		if (character.stock[i])
-			this->stock[i] = character.stock[i]->clone(); //stock un ptr
+			this->stock[i] = character.stock[i]->clone();
 	}
-	instance_cpy++;
+	instance++;
 	std::cout << "Copy constructor Character" << std::endl;
-	std::cout << "Number of copyconstructor call = "<<instance_cpy << std::endl
+	std::cout << "Number of remaining instance = "<<instance << std::endl;
 }
 
 Character	&Character::operator=(const Character &rhs)
-{// 1 test "automorphe"
-	if (this != rhs)
+{
+	if (this != &rhs)
 	{
-		this->name = rhs.getName();
+		this->name = rhs.getName();// segfaul
+	for (int i = 0; i < Character::size; i++)
+	{
+		Character::stock[i] = NULL;
+	}
 		for (int i = 0; i < Character::size; i++)
-		{// effacement
+		{
 			if (this->stock[i])
-				delete (this->stock);
+				delete (this->stock[i]);
 		}
 		for (int i = 0; i < Character::size; i++)
-		{// Clonage...
+		{
 			if (this->stock[i])
 				this->stock[i] = rhs.stock[i]->clone();
 			else
@@ -74,11 +77,22 @@ Character::~Character()
 	for (int i = 0; i < Character::size; i++)
 	{
 		if (this->stock[i])
-			delete (this->stock);
+			delete (this->stock[i]);
 	}
-	instance_def--;
+	instance--;
 	std::cout << "destructor  Character" << std::endl;
-	std::cout << "Number of Default constructor call = "<<instance_def << std::endl
+	std::cout << "Number of remaining instance = "<<instance << std::endl;
+	if (instance == 0)
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			if (left[i])
+			{
+				delete left[i];
+				left[i] = NULL;
+			}
+		}
+	}
 
 }
 
@@ -94,27 +108,60 @@ void				Character::equip(AMateria *m)
 	{
 		if (this->stock[i] == NULL)
 		{
-			this->stcok[i] = m;
-			break ;
+			this->stock[i] = m;
+			//break ;
+			return ;
 		}
 		i++;
 	}
+	// si pas de place on le met dans left
+	i = 0;
+	while (i < 100)
+	{
+		if (left[i] == NULL)
+		{
+			left[i] = m;
+			break;
+		}
+		i++;
+	}
+	if (i == 100)
+	{
+		std::cout << "too much on the floor !" << std::endl;
+		delete m;
+	}
+
 }
 
 void				Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < Character::size)
 	{
-		// comment stoker ce qu'on va enlever ??
-		this->stock[idx] = NULL;
+		int i = 0;
+		while (i < 100)
+		{
+			if (left[i] == NULL)
+			{
+				left[i] = this->stock[i];
+				break ;
+			}
+			i++;
+		}
+		if (i == 100)
+		{
+			std::cout << "TOO much unequipped on floor " << std::endl;
+			return ;
+		}
+		else
+			this->stock[idx] = NULL;
 	}
 }
 
 void				Character::use(int idx, ICharacter &target)
-{// comment vérifier l'existence d'un target ?
+{
 	if (idx >= 0 && idx < Character::size && this->stock[idx])
 	{
-		this->stock[i]->use(target);
+		this->stock[idx]->use(target);
 		this->unequip(idx);
 	}
 }
