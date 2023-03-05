@@ -35,53 +35,71 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
-	std::cout<< yellow << "---------- Test surcharge dleak  ----------"<< std::endl;
-	IMateriaSource* src1 = new MateriaSource();// pb 
-	src1->learnMateria(new Ice());
+	std::cout<< yellow << "---------- Test multiple cycle  ----------"<< std::endl;
 	ICharacter* Rambo = new Character("rambo");
 	ICharacter* Terminator = new Character("terminator");
-	AMateria* tmp1;
-	tmp1 = src1->createMateria("ice");
-	for (int i=0; i < 66; i++)
+	for (int i=0; i < 6; i++)
 	{
-//		tmp1 = src1->createMateria("ice");
+		IMateriaSource* src1 = new MateriaSource();
+		src1->learnMateria(new Ice());
+		AMateria* tmp1;
+		tmp1 = src1->createMateria("ice");
 		Terminator->equip(tmp1);
 		Terminator->use(0, *Rambo);
+		delete src1;
 	}
 	delete Rambo;
 	delete Terminator;
-	delete src1;
-
 	std::cout<< magenta << "---------- Test surcharge d'inventaire  ----------"<< std::endl;
-   	IMateriaSource* materia_source = new MateriaSource();
+	IMateriaSource* materia_source = new MateriaSource();
 	materia_source->learnMateria(new Cure());
 	ICharacter* alf = new Character("Alf");
-  	for (int i = 0; i < 156; i++)
-   	{
-    	alf->equip(materia_source->createMateria("cure"));
-  	}
-  	delete materia_source;
-  	delete alf;
+	for (int i = 0; i < 156; i++)
+	{
+		alf->equip(materia_source->createMateria("cure"));
+	}
+	delete materia_source;
+	delete alf;
 	std::cout<< magenta << "---------- copy et op= ----------"<< std::endl;
 	IMateriaSource* ms = new MateriaSource();
 	AMateria *cure = new Cure();
 	ms->learnMateria(cure);
-	AMateria* temp_materia = ms->createMateria("cure");
-  	Character* bert = new Character("Bert");
- 	bert->equip(temp_materia);
+	ms->learnMateria(new Ice());
+	Character* bert = new Character("Bert");
+	bert->equip(ms->createMateria("cure"));
+	bert->equip(ms->createMateria("ice"));
+	bert->equip(ms->createMateria("cure"));
+	bert->equip(ms->createMateria("ice"));
 	Character *Dr = new Character(*bert);
+
+	for (int i= 0; i < 4; i++)
+	{
+		std::cout << Dr->getStock(i)->getType() << "  <--Dr ";
+		std::cout <<"bert--> "<< bert->getStock(i)->getType() << std::endl;
+	}
 	Dr->use(0, *bert);
-	Dr->use(0, *bert);
-	delete Dr;
-	delete ms;
-	delete bert;
+
+	bert->equip(ms->createMateria("cure"));
+	bert->equip(ms->createMateria("ice"));
+	bert->equip(ms->createMateria("cure"));
+	bert->equip(ms->createMateria("ice"));
+	
 	Character *dobb = new Character("Dobb");
 	*dobb = *bert;
+	
+	for (int i= 0; i < 4; i++)
+	{
+		std::cout << dobb->getStock(i)->getType() << "  <--dobb";
+		std::cout <<"bert--> "<< bert->getStock(i)->getType() << std::endl;
+	}
+	
 	dobb->use(0, *bert);
+	dobb->use(1, *bert);
+	
 	delete ms;
 	delete bert;
 	delete Dr;
 	delete dobb;
- std::cout<< magenta << "---------- FIN  ----------"<< std::endl;
+	std::cout<< magenta << "---------- FIN  ----------"<< std::endl;
 	return 0;
 }

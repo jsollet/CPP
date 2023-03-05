@@ -25,21 +25,18 @@ Character::Character(const std::string Name): name(Name)
 	std::cout << "Number of remaining instance = "<<instance << std::endl;
 }
 
-Character::Character(const Character &character): name(character.getName())
+Character::Character(const Character &rhs): name(rhs.getName())
 {
 	for (int i = 0; i < Character::size; i++)
 	{
 		Character::stock[i] = NULL;
 	}
-/*	for (int i = 0; i < Character::size; i++)
+	for (int i = 0; i < Character::size; i++)
 	{
-		if (this->stock[i])
-			delete (this->stock[i]);
-	}
-*/	for (int i = 0; i < Character::size; i++)
-	{
-		if (character.stock[i])
-			this->stock[i] = character.stock[i]->clone();
+		if (rhs.stock[i])
+			this->stock[i] = rhs.stock[i]->clone();
+		else
+			this->stock[i] = NULL;
 	}
 	instance++;
 	std::cout << "Copy constructor Character" << std::endl;
@@ -50,11 +47,7 @@ Character	&Character::operator=(const Character &rhs)
 {
 	if (this != &rhs)
 	{
-		this->name = rhs.getName();// segfaul
-	for (int i = 0; i < Character::size; i++)
-	{
-		Character::stock[i] = NULL;
-	}
+		this->name = rhs.getName();
 		for (int i = 0; i < Character::size; i++)
 		{
 			if (this->stock[i])
@@ -62,7 +55,7 @@ Character	&Character::operator=(const Character &rhs)
 		}
 		for (int i = 0; i < Character::size; i++)
 		{
-			if (this->stock[i])
+			if (rhs.stock[i])
 				this->stock[i] = rhs.stock[i]->clone();
 			else
 				this->stock[i] = NULL;
@@ -76,7 +69,7 @@ Character::~Character()
 {
 	for (int i = 0; i < Character::size; i++)
 	{
-		if (this->stock[i])
+		if (this->stock[i] != NULL)
 			delete (this->stock[i]);
 	}
 	instance--;
@@ -109,12 +102,10 @@ void				Character::equip(AMateria *m)
 		if (this->stock[i] == NULL)
 		{
 			this->stock[i] = m;
-			//break ;
 			return ;
 		}
 		i++;
 	}
-	// si pas de place on le met dans left
 	i = 0;
 	while (i < 100)
 	{
@@ -142,7 +133,7 @@ void				Character::unequip(int idx)
 		{
 			if (left[i] == NULL)
 			{
-				left[i] = this->stock[i];
+				left[i] = this->stock[idx];
 				break ;
 			}
 			i++;
@@ -150,7 +141,6 @@ void				Character::unequip(int idx)
 		if (i == 100)
 		{
 			std::cout << "TOO much unequipped on floor " << std::endl;
-			return ;
 		}
 		else
 			this->stock[idx] = NULL;
@@ -162,6 +152,15 @@ void				Character::use(int idx, ICharacter &target)
 	if (idx >= 0 && idx < Character::size && this->stock[idx])
 	{
 		this->stock[idx]->use(target);
-		this->unequip(idx);
+		delete this->stock[idx];
+		this->stock[idx] = NULL;
 	}
+}
+
+AMateria			*Character::getStock(int idx) const
+{
+	if (idx >= 0 && idx < Character::size)
+		return (this->stock[idx]);
+	else
+		return (NULL);
 }

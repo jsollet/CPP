@@ -1,6 +1,6 @@
 NAME = Interface
 
-# CC =  c++-12
+#CC =  c++-12
 CC = g++
 
 RM = 		@rm -rf
