@@ -1,4 +1,5 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 bool	Form::debug = false; 
 
@@ -50,34 +51,37 @@ const std::string		&Form::getName() const
 	return (this->name);
 }
 
-bool					getStatus() const
+bool					Form::getStatus() const
 {
 	return (this->is_signed);
 }
 
-unsigned int			getSignLevel() const
+unsigned int			Form::getSignLevel() const
 {
 	return (this->sign_level);
 }
 
-unsigned int			getExecLevel() const
+unsigned int			Form::getExecLevel() const
 {
 	return (this->exec_level);
 }
 // verifie (bool)
-bool					beSigned(Bureaucrat &bureaucrat)
+bool					Form::beSigned(Bureaucrat &bureaucrat)
 {
-	if (bureaucrat.getGrade() < this->getSignLevel())
-		this->is_signed = true;
-	else throw Form::tooLow;
+	if (bureaucrat.getGrade() > this->getSignLevel())
+		throw Form::tooLow;
+	else return (this->is_signed = true);
+//	else throw Form::tooLow;
 }
 // attn
+
 void	Form::check() const
 {
-	if (this->sign_level < Bureaucrate::highest || this->sign_level > Bureaucrat::lowest)
-		throw Bureaucrat::tooHigh;
-	if (this->exec_level < Bureaucrate::highest || this->exec_level > Bureaucrat::lowest)
-		throw Bureaucrat::tooHigh;
+	if (this->sign_level < Bureaucrat::highest || this->sign_level > Bureaucrat::lowest)
+	//	throw Bureaucrat::tooHigh;
+		throw Bureaucrat::GradeTooHighException();
+	if (this->exec_level < Bureaucrat::highest || this->exec_level > Bureaucrat::lowest)
+		throw Bureaucrat::GradeTooHighException();
 }
 
 std::ostream	&operator<<(std::ostream &os, Form const &rhs)

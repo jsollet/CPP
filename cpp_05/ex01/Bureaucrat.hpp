@@ -24,11 +24,12 @@ class	Bureaucrat
 
 		void				check() const;
 		static bool			debug;// static-> partout
+		
+		static const unsigned int		lowest = 150;
+		static const unsigned int		highest = 1;
 	private:
 		const std::string				name;
 		unsigned int					grade;
-		static const unsigned int		lowest = 150;
-		static const unsigned int		highest = 1;
 
 
 	public://nested class, ic c'est standardisé

@@ -6,6 +6,8 @@
 #include <exception> 
 #include "bureaucrat.hpp"
 
+class Bureaucrat;
+
 class	Form
 {// attn verifie...
 	public:
