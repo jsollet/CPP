@@ -11,6 +11,10 @@ FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic # -fsanitize=address
 CFILES =	main.cpp \
 			Bureaucrat.cpp \
 			Form.cpp \
+			PresidentialPardonForm.cpp \
+#			ShrubberyCreationForm.cpp \
+#			RobotomyRequestForm.hpp \
+			PresidentialPardonForm.hpp \
 
 
 OBJECTS = 	$(CFILES:.cpp=.o)

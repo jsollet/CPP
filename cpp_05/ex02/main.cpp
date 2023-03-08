@@ -83,11 +83,8 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
-
+/*
 	std::cout << "---------------------- test Form ---------------------- "<< std::endl;
-	/* test pour savoir si le bureaucrat a le bon niveau lors de la
-	formation du formulaire
-	*/
 	Form f10("form °10", false, 24, 34);
 	Form f11(f10);
 	Form f12;
@@ -166,7 +163,7 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
-
+*/
 	std::cout << "---------------------- FIN ---------------------- "<< std::endl;
 	return (0);
 }
