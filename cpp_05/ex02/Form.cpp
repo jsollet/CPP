@@ -72,7 +72,16 @@ bool					Form::beSigned(const Bureaucrat &bureaucrat)
 		throw Form::tooLow;
 	else return (this->is_signed = true);
 }
-
+// Ajout de bool execute...
+// a voir
+/*
+bool					form::execute(const Bureaucrat &executor)
+{
+	if (executor.getGrade() > this->getExecLevel())
+		throw Form::FormNotExec;//
+	else return (true);
+}
+*/
 void	Form::check() const
 {
 	if (this->sign_level < Bureaucrat::highest || this->exec_level <

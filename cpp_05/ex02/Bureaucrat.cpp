@@ -105,6 +105,27 @@ void	Bureaucrat::signForm(Form &form)
 	}
 }
 
+// insertion executeForm
+// en cours...
+void	Bureaucrat::executeForm(const Form &form)
+{
+	try
+	{
+		std::cout << cyan;
+		if (form.getStatus() == false)
+			throw Form::FormNotSigned();
+		if (form.execute(*this) == false)
+			throw Form::FormNotExecuted();
+		std::cout << this->getName() << " executed " << form.getName() \
+		   	<< reset << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << this->getName() << " could't execute " << form.getName() \
+		<< " because " << e.what() << reset << std::endl;
+	}
+}
+
 std::ostream	&operator<<(std::ostream &os, Bureaucrat const &rhs)
 {
 	os << yellow << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() <<

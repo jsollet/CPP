@@ -4,16 +4,21 @@
 
 bool	PresidentialPardonForm::debug = false;
 
-PresidentialPardonForm::PresidentialPardonForm()
-	:name("Presidential Pardon Form"), is_signed(false),sign_level(25),
-	exec_level(5), target("");
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
+:Form("Presidential Pardon Form", false, 25, 5), target(target)
+{
+	if (debug)
+		std::cout << "Param PPF Ctor " << std::endl;
+}
+
+PresidentialPardonForm::PresidentialPardonForm(): Form("Presidential Pardon Form", false, 25, 5), target("")
 {
 	if (debug)
 		std::cout << "Default PPF Ctor " << std::endl;
 }
 // a faire...
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &rhs)
-	:name(rhs.getName()), is_signed(rhs.getStatus()), sign_level(rhs.getSignLevel()), exec_level(rhs.getExecLevel())
+:Form("Presidential Pardon Form", false, 25, 5), target(rhs.getTarget())
 {
 	if (debug)
 		std::cout << "Copy. form Ctor " << std::endl;
@@ -24,9 +29,9 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPard
 	if (this != &rhs)
 	{
 	//	this->name = rhs.getName(); =><= car name const
-		this->is_signed = rhs.getStatus();
-		this->sign_level = rhs.getSignLevel();
-		this->exec_level = rhs.getExecLevel();
+//		this->is_signed = rhs.getStatus();
+//		this->sign_level = rhs.getSignLevel();
+//		this->exec_level = rhs.getExecLevel();
 	}
 	if (debug)
 		std::cout << "Copy. form Ctor " << std::endl;
@@ -37,4 +42,22 @@ PresidentialPardonForm::~PresidentialPardonForm()
 {
 	if (debug)
 		std::cout << "PresidentialPardonForm Dtor " << std::endl;
+}
+
+const std::string	PresidentialPardonForm::getTarget(void) const
+{
+	return (this->target);
+}
+// a verifier faux
+bool	PresidentialPardonForm::execute(const Bureaucrat &executor) const
+{
+	if (executor.getGrade() > this->getExecLevel())
+		throw Form::FormNotExecuted();
+	else if (this->getStatus() == false)
+		throw Form::FormNotSigned();
+	else
+	{
+		std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+	}
+		return (true);
 }

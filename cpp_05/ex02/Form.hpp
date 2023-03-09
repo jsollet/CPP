@@ -23,7 +23,7 @@ class	Form
 		unsigned int		getExecLevel() const;
 		bool				beSigned(const Bureaucrat &bureaucrat);
 
-
+		virtual bool		execute(const Bureaucrat &executor) const = 0;//
 
 		void				check() const;
 		static bool			debug;
@@ -54,6 +54,24 @@ class	Form
 			}
 		} tooLow;
 
+	public:
+		class	FormNotSigned: public std::exception
+		{
+			virtual const char *what() const throw()
+			{
+				return ("Form: not signed");
+			}
+		} notSigned;
+
+	public:
+		class	FormNotExecuted: public std::exception
+		{
+			virtual const char *what() const throw()
+			{
+				return ("Form: Bureaucrat level too low");
+			}
+		} FormNotExec;
+	
 
 };
 

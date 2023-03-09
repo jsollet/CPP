@@ -1,10 +1,14 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+
 int main()
 {
 	Bureaucrat::debug = false;
 	Form::debug = false;
-
+	PresidentialPardonForm::debug = false;
+	ShrubberyCreationForm::debug = false; 
 	try
 	{
 		std::cout << "------------- out of range --------------- "<< std::endl;
@@ -164,6 +168,43 @@ int main()
 		std::cout << e.what() << std::endl;
 	}
 */
+	std::cout << "------------------test  president. ---------------------- "<< std::endl;
+	try
+	{
+		Bureaucrat					Alfred = Bureaucrat("Alfred", 100);
+		Bureaucrat					Sylvester = Bureaucrat("Sylvester",1);
+		PresidentialPardonForm		F1 = PresidentialPardonForm("Big Boss");
+		std::cout<< "Before Sylvester signs:\t\t" << F1 << std::endl;
+		F1.beSigned(Sylvester);
+		std::cout<< "after Sylvester signed:\t\t" << F1 << std::endl;
+		Sylvester.executeForm(F1);
+		F1.execute(Sylvester);
+		Alfred.executeForm(F1);
+		F1.execute(Alfred);
+	}
+	catch (std::exception &e)
+	{
+		std::cout <<e.what() << std::endl;
+	}
+	std::cout << "------------------test shrubbery  ---------------------- "<< std::endl;
+	try
+	{
+		Bureaucrat					Alfred = Bureaucrat("Alfred", 100);
+		Bureaucrat					Sylvester = Bureaucrat("Sylvester",1);
+		ShrubberyCreationForm		F1 = ShrubberyCreationForm("Baobab");
+		ShrubberyCreationForm		F2 = ShrubberyCreationForm("Platane");
+		std::cout<< "Before Sylvester signs:\t\t" << F1 << std::endl;
+		F1.beSigned(Sylvester);
+		std::cout<< "after Sylvester signed:\t\t" << F1 << std::endl;
+		Sylvester.executeForm(F1);
+		F1.execute(Sylvester);
+		Alfred.executeForm(F2);
+		F2.execute(Alfred);
+	}
+	catch (std::exception &e)
+	{
+		std::cout <<e.what() << std::endl;
+	}
 	std::cout << "---------------------- FIN ---------------------- "<< std::endl;
 	return (0);
 }
