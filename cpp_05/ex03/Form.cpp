@@ -29,6 +29,7 @@ Form	&Form::operator=(const Form &rhs)
 {
 	if (this != &rhs)
 	{
+	//	this->name = rhs.getName(); =><= car name const
 		this->is_signed = rhs.getStatus();
 		this->sign_level = rhs.getSignLevel();
 		this->exec_level = rhs.getExecLevel();
@@ -65,7 +66,7 @@ unsigned int			Form::getExecLevel() const
 	return (this->exec_level);
 }
 
-bool					Form::beSigned(Bureaucrat &bureaucrat)
+bool					Form::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > this->getSignLevel())
 		throw Form::tooLow;
@@ -74,16 +75,22 @@ bool					Form::beSigned(Bureaucrat &bureaucrat)
 
 void	Form::check() const
 {
-	if (this->sign_level < Bureaucrat::highest || this->sign_level > Bureaucrat::lowest)
+	if (this->sign_level < Bureaucrat::highest || this->exec_level <
+	Bureaucrat::highest)
 		throw Bureaucrat::GradeTooHighException();
+	if (this->sign_level > Bureaucrat::lowest || this->exec_level >
+	Bureaucrat::lowest)
+		throw Bureaucrat::GradeTooLowException();
 	if (this->exec_level < Bureaucrat::highest || this->exec_level > Bureaucrat::lowest)
 		throw Bureaucrat::GradeTooHighException();
 }
 
 std::ostream	&operator<<(std::ostream &os, Form const &rhs)
 {
-	os <<"Form:\t"<< rhs.getName() << std::endl << "Signed\t"<< rhs.getStatus() << std::endl;
-	os << "Sign level:\t" << rhs.getSignLevel() << std::endl << "Exec level:\t" <<rhs.getExecLevel() <<std::endl;
+	os <<cyan << "Form name: "<< rhs.getName() << " Signed ? "<< std::boolalpha <<
+	rhs.getStatus() << std::noboolalpha;
+	os << " Sign level: " << rhs.getSignLevel() <<  " Exec level: "
+	<<rhs.getExecLevel() << reset << std::endl;
 	return (os);
 }
 

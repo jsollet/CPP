@@ -2,7 +2,7 @@
 # define BUREAUCRAT_HPP
 #include <iostream>
 #include <string>
-#include <stdexcept> // pour les exception...
+#include <stdexcept>
 #include <exception> 
 
 class	Bureaucrat
@@ -14,16 +14,16 @@ class	Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &rhs);
 		~Bureaucrat();
 
-		const std::string	&getName() const;//
+		const std::string	&getName() const;
 		unsigned int		getGrade() const;
 
 		Bureaucrat 			&operator++();
 		Bureaucrat			&operator--();
-		Bureaucrat 			operator++(int);// doit etre  int...
+		Bureaucrat 			operator++(int);
 		Bureaucrat			operator--(int);
 
 		void				check() const;
-		static bool			debug;// static-> partout
+		static bool			debug;
 		
 		static const unsigned int		lowest = 150;
 		static const unsigned int		highest = 1;
@@ -32,26 +32,26 @@ class	Bureaucrat
 		unsigned int					grade;
 
 
-	public://nested class, ic c'est standardisé
+	public:
 		class	GradeTooHighException : public std::exception
 		{
 			virtual const char *what() const throw()
-			{// definition dans la class "mère"
+			{
 				return ("Grade: too high");
 			}
 		} tooHigh;
 	
-	public://nested class, ic c'est standardisé
+	public:
 		class	GradeTooLowException : public std::exception
 		{
 			virtual const char *what() const throw()
-			{// definition dans la class "mère"
+			{
 				return ("Grade: too low");
 			}
 		} tooLow;
 
 };
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat const &rhs); // ?
+std::ostream &operator<<(std::ostream &os, Bureaucrat const &rhs);
 
 #endif

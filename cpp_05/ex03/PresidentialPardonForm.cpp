@@ -26,6 +26,13 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &rhs
 
 PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs)
 {
+	if (this != &rhs)
+	{
+//		this->name = rhs.getName(); =><= car name const
+//		this->is_signed = rhs.getStatus();
+//		this->sign_level = rhs.getSignLevel();
+//		this->exec_level = rhs.getExecLevel();
+	}
 	if (debug)
 		std::cout << "Copy. form Ctor " << std::endl;
 	return (*this);

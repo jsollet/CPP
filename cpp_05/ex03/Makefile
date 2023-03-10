@@ -1,7 +1,7 @@
-NAME = Bureaucrate
+NAME = Intern
 
-#CC =  c++-12
-CC = g++
+CC =  c++-12
+# CC = g++
 
 RM = 		@rm -rf
 
@@ -10,6 +10,11 @@ FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic # -fsanitize=address
 
 CFILES =	main.cpp \
 			Bureaucrat.cpp \
+			Form.cpp \
+			PresidentialPardonForm.cpp \
+			ShrubberyCreationForm.cpp \
+			RobotomyRequestForm.cpp \
+			Intern.cpp \
 
 
 OBJECTS = 	$(CFILES:.cpp=.o)

@@ -1,4 +1,4 @@
-NAME = Form
+NAME = 28B
 
 CC =  c++-12
 # CC = g++
@@ -6,14 +6,14 @@ CC =  c++-12
 RM = 		@rm -rf
 
 
-FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic  -fsanitize=address
+FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic # -fsanitize=address
 
 CFILES =	main.cpp \
 			Bureaucrat.cpp \
 			Form.cpp \
 			PresidentialPardonForm.cpp \
 			ShrubberyCreationForm.cpp \
-#			RobotomyRequestForm.cpp \
+			RobotomyRequestForm.cpp \
 
 
 OBJECTS = 	$(CFILES:.cpp=.o)

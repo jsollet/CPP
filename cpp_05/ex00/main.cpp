@@ -11,8 +11,8 @@ int main()
 		std::cout<< "start:\t\t" << "Alfred = 0" << std::endl;
 		Bureaucrat	Alfred = Bureaucrat("Alfred", 0);
 	}
-	catch(std::exception &e)// standard
-	{// standard
+	catch(std::exception &e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 
@@ -22,8 +22,8 @@ int main()
 		std::cout<< "start:\t\t" << "Alfred = 151" << std::endl;
 		Bureaucrat	Alfred = Bureaucrat("Alfred", 151);
 	}
-	catch(std::exception &e)// standard
-	{// standard
+	catch(std::exception &e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 
@@ -39,8 +39,8 @@ int main()
 		Alfred++;
 		std::cout<< "increment++:\t"<< Alfred << std::endl;
 	}
-	catch(std::exception &e)// standard
-	{// standard
+	catch(std::exception &e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 
@@ -56,8 +56,8 @@ int main()
 		Alfred--;
 		std::cout<< "decrement--:\t"<< Alfred << std::endl;
 	}
-	catch(std::exception &e)// standard
-	{// standard
+	catch(std::exception &e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 
@@ -79,8 +79,8 @@ int main()
 		Alfred++;
 		std::cout<< "increment++:\t"<< Alfred << std::endl;
 	}
-	catch(std::exception &e)// standard
-	{// standard
+	catch(std::exception &e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 

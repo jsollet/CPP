@@ -28,6 +28,13 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs)
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs)
 {
+	if (this != &rhs)
+	{
+//		this->name = rhs.getName(); =><= car name const
+//		this->is_signed = rhs.getStatus();
+//		this->sign_level = rhs.getSignLevel();
+//		this->exec_level = rhs.getExecLevel();
+	}
 	if (debug)
 		std::cout << "Copy.shrubbery  form Ctor " << std::endl;
 	return (*this);
