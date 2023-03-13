@@ -31,6 +31,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &rhs)
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs)
 {
+	rhs.getTarget();
 	if (debug)
 		std::cout << "Copy.Robotomy  form Ctor " << std::endl;
 	return (*this);

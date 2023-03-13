@@ -74,16 +74,16 @@ bool					Form::beSigned(Bureaucrat &bureaucrat)
 
 void	Form::check() const
 {
-	if (this->sign_level < Bureaucrat::highest || this->sign_level > Bureaucrat::lowest)
+	if (this->sign_level < Bureaucrat::highest || this->exec_level < Bureaucrat::highest)
 		throw Bureaucrat::GradeTooHighException();
-	if (this->exec_level < Bureaucrat::highest || this->exec_level > Bureaucrat::lowest)
-		throw Bureaucrat::GradeTooHighException();
+	if (this->sign_level > Bureaucrat::lowest || this->exec_level > Bureaucrat::lowest)
+		throw Bureaucrat::GradeTooLowException();
 }
 
 std::ostream	&operator<<(std::ostream &os, Form const &rhs)
 {
-	os <<"Form:\t"<< rhs.getName() << std::endl << "Signed\t"<< rhs.getStatus() << std::endl;
-	os << "Sign level:\t" << rhs.getSignLevel() << std::endl << "Exec level:\t" <<rhs.getExecLevel() <<std::endl;
+	os <<"Form: "<< rhs.getName() << std::endl << "Signed  "<< std::boolalpha << rhs.getStatus() << std::noboolalpha;
+	os << " Sign level:  " << rhs.getSignLevel() << " Exec level: " <<rhs.getExecLevel() <<std::endl;
 	return (os);
 }
 

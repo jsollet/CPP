@@ -28,6 +28,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs)
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs)
 {
+	rhs.getTarget();
 	if (debug)
 		std::cout << "Copy.shrubbery  form Ctor " << std::endl;
 	return (*this);

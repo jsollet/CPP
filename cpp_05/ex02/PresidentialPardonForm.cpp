@@ -26,6 +26,7 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &rhs
 
 PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs)
 {
+	rhs.getTarget();
 	if (debug)
 		std::cout << "Copy. form Ctor " << std::endl;
 	return (*this);

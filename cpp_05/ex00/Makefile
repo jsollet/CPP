@@ -1,7 +1,7 @@
 NAME = Bureaucrate
 
-#CC =  c++-12
-CC = g++
+CC =  c++-12
+#CC = g++
 
 RM = 		@rm -rf
 

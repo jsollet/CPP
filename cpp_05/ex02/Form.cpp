@@ -80,8 +80,6 @@ void	Form::check() const
 	if (this->sign_level > Bureaucrat::lowest || this->exec_level >
 	Bureaucrat::lowest)
 		throw Bureaucrat::GradeTooLowException();
-	if (this->exec_level < Bureaucrat::highest || this->exec_level > Bureaucrat::lowest)
-		throw Bureaucrat::GradeTooHighException();
 }
 
 std::ostream	&operator<<(std::ostream &os, Form const &rhs)

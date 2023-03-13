@@ -5,97 +5,20 @@ int main()
 	Bureaucrat::debug = false;
 	Form::debug = false;
 
-	try
-	{
-		std::cout << "------------- out of range --------------- "<< std::endl;
-		std::cout<< "start:\t\t" << "Alfred = 0" << std::endl;
-		Bureaucrat	Alfred = Bureaucrat("Alfred", 0);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
 
-	try
-	{
-		std::cout << "------------- out of range --------------- "<< std::endl;
-		std::cout<< "start:\t\t" << "Alfred = 151" << std::endl;
-		Bureaucrat	Alfred = Bureaucrat("Alfred", 151);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	try
-	{
-		std::cout << "--------------- increment ---------------- "<< std::endl;
-		Bureaucrat	Alfred = Bureaucrat("Alfred", 3);
-		std::cout<< "start:\t\t" << Alfred << std::endl;
-		++Alfred;
-		std::cout<< "++increment:\t"<< Alfred << std::endl;
-		Alfred++;
-		std::cout<< "increment++:\t"<< Alfred << std::endl;
-		Alfred++;
-		std::cout<< "increment++:\t"<< Alfred << std::endl;
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	try
-	{
-		std::cout << "--------------- decrement ---------------- "<< std::endl;
-		Bureaucrat	Alfred = Bureaucrat("Alfred", 148);
-		std::cout<< "start:\t\t" << Alfred << std::endl;
-		--Alfred;
-		std::cout<< "--decrement:\t"<< Alfred << std::endl;
-		Alfred--;
-		std::cout<< "decrement--:\t"<< Alfred << std::endl;
-		Alfred--;
-		std::cout<< "decrement--:\t"<< Alfred << std::endl;
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	try
-	{
-		std::cout << "----------------- ++/-- ------------------ "<< std::endl;
-		Bureaucrat	Alfred = Bureaucrat("Alfred", 100);
-		std::cout<< "start:\t\t" << Alfred << std::endl;
-		--Alfred;
-		std::cout<< "--decrement:\t"<< Alfred << std::endl;
-		Alfred--;
-		std::cout<< "decrement--:\t"<< Alfred << std::endl;
-		Alfred--;
-		std::cout<< "decrement--:\t"<< Alfred << std::endl;
-		++Alfred;
-		std::cout<< "++increment:\t"<< Alfred << std::endl;
-		Alfred++;
-		std::cout<< "increment++:\t"<< Alfred << std::endl;
-		Alfred++;
-		std::cout<< "increment++:\t"<< Alfred << std::endl;
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	std::cout << "---------------------- test Form ---------------------- "<< std::endl;
+	std::cout << "---------------------- test Form (copy et =) ---------------------- "<< std::endl;
 	/* test pour savoir si le bureaucrat a le bon niveau lors de la
 	formation du formulaire
 	*/
-	Form f10("form °10", false, 24, 34);
+	Form f10("form 10", false, 24, 34);
 	Form f11(f10);
 	Form f12;
 	f12 = f10;
-	std::cout << f10 << std::endl;
-	std::cout << f11 << std::endl;
-	std::cout << f12 << std::endl;
+	std::cout << "original:\t" << f10 << std::endl;
+	std::cout << "copie:\t\t" << f11  << std::endl;
+	std::cout << "op = :\t\t" << f12 << std::endl;
 
+	std::cout << "---------------------- test Form (outrange) ---------------------- "<< std::endl;
 	try
 	{
 		std::cout<< "start:\t\t" << "sign level = 0" << std::endl;
@@ -147,9 +70,10 @@ int main()
 		Bureaucrat	Alfred = Bureaucrat("Alfred", 100);
 		Bureaucrat	Sylvester = Bureaucrat("Sylvester",1);
 		Form	F1 = Form("formulaire F1",false, 51, 15);
-		std::cout<< "start:\t\t" << "sign_level = 20" << std::endl;
-		std::cout<< "start:\t\t" << Alfred << std::endl;
-		std::cout<< "start:\t\t" << F1 << std::endl;
+		std::cout<< magenta<< "start:\t\t" << Alfred << std::endl;
+		std::cout<< "start:\t\t" << Sylvester << std::endl;
+
+		std::cout<< "start:\t\t" << F1 << reset << std::endl;
 	std::cout << "---------------- test signature ----------------- "<< std::endl;
 		std::cout<< "Before Sylvester signs:\t\t" << F1 << std::endl;
 		F1.beSigned(Sylvester);

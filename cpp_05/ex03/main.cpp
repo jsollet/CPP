@@ -21,7 +21,10 @@ int main()
 	std::string test[5]={"", "robotomy request", "shrubbery creation", "presidential pardon", "Robotomy request"};
 
 		Bureaucrat					Sylvester = Bureaucrat("Sylvester",1);
+		Bureaucrat					Alfred = Bureaucrat("Alfred",50);
 		Form	*f1;
+		std::cout << green << Sylvester << std::endl;
+		std::cout << cyan<< Alfred << std::endl;
 		for (int i=0; i<5 ; i++)
 		{
 			f1 = intern1.makeForm(test[i], "bender");
@@ -29,7 +32,8 @@ int main()
 			{
 				f1->beSigned(Sylvester);
 				Sylvester.executeForm(*f1);
-				std::cout << *f1 << std::endl;
+				std::cout << *f1 << std::endl<<std::endl;;
+				Alfred.executeForm(*f1);
 				delete (f1);
 			}
 		}
