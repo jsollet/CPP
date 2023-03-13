@@ -14,16 +14,16 @@ class	Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &rhs);
 		~Bureaucrat();
 
-		const std::string	&getName() const;//
+		const std::string	&getName() const;
 		unsigned int		getGrade() const;
 
 		Bureaucrat 			&operator++();
 		Bureaucrat			&operator--();
-		Bureaucrat 			operator++(int);// doit etre  int...
+		Bureaucrat 			operator++(int);
 		Bureaucrat			operator--(int);
 
 		void				check() const;
-		static bool			debug;// static-> partout
+		static bool			debug;
 	private:
 		const std::string				name;
 		unsigned int					grade;
@@ -31,26 +31,26 @@ class	Bureaucrat
 		static const unsigned int		highest = 1;
 
 
-	public://nested class, ic c'est standardisé
+	public:
 		class	GradeTooHighException : public std::exception
 		{
 			virtual const char *what() const throw()
-			{// definition dans la class "mère"
+			{
 				return ("Grade: too high");
 			}
 		} tooHigh;
 	
-	public://nested class, ic c'est standardisé
+	public:
 		class	GradeTooLowException : public std::exception
 		{
 			virtual const char *what() const throw()
-			{// definition dans la class "mère"
+			{
 				return ("Grade: too low");
 			}
 		} tooLow;
 
 };
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat const &rhs); // ?
+std::ostream &operator<<(std::ostream &os, Bureaucrat const &rhs);
 
 #endif

@@ -1,12 +1,12 @@
 NAME = Bureaucrate
 
-#CC =  c++-12
-CC = g++
+CC =  c++-12
+#CC = g++
 
 RM = 		@rm -rf
 
 
-FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic  -fsanitize=address
+FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic # -fsanitize=address
 
 CFILES =	main.cpp \
 			Bureaucrat.cpp \

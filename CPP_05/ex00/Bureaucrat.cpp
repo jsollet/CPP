@@ -11,7 +11,7 @@ Bureaucrat::Bureaucrat(): name(""), grade(150)
 Bureaucrat::Bureaucrat(const std::string &Name, unsigned int Grade)
 	:name(Name), grade(Grade)
 {
-	check(); // c'est ici le trow exception..
+	check();
 	if (Bureaucrat::debug)
 		std::cout << "Param. constructor Bureaucrat" << std::endl;
 }
@@ -19,7 +19,6 @@ Bureaucrat::Bureaucrat(const std::string &Name, unsigned int Grade)
 Bureaucrat::Bureaucrat(const Bureaucrat &rhs): name(rhs.getName()),
 grade(rhs.getGrade())
 {
-//	this->grade = rhs.grade();// n'est pas const
 	if (Bureaucrat::debug)
 		std::cout << "Copy. constructor Bureaucrat" << std::endl;
 }
@@ -28,7 +27,6 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &rhs)
 {
 	if (this != &rhs)
 	{
-//		this->name = rhs.getName();// est pb avec name const
 		this->grade = rhs.getGrade();
 	}
 	if (Bureaucrat::debug)
@@ -53,29 +51,28 @@ unsigned int Bureaucrat::getGrade() const
 }
 
 Bureaucrat	&Bureaucrat::operator++()
-{// attn...
+{
 	--grade;
-	check();//
+	check();
 	return (*this);
 }
 
 Bureaucrat	&Bureaucrat::operator--()
-{// attn...
+{
 	++grade;
-	check();//
+	check();
 	return (*this);
 }
 
 Bureaucrat	Bureaucrat::operator++(int)
-{// attn... faut il le check ?
+{
 	Bureaucrat tmp(*this);
 	operator++();
 	return (tmp);
 }
 
-
 Bureaucrat	Bureaucrat::operator--(int)
-{// attn...
+{
 	Bureaucrat tmp(*this);
 	operator--();
 	return (tmp);
