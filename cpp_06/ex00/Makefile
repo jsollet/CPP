@@ -1,15 +1,16 @@
-NAME =	convert
+NAME = Convert
 
-# CC =  c++-12
-CC = g++
+//CC =  c++-12 #ecole
+CC = g++ #maison
 
 RM = 		@rm -rf
 
 
-FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic
+FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic # -fsanitize=address
 
 CFILES =	main.cpp \
-			ScalarConversion \
+			ScalarConverter.cpp \
+			
 
 OBJECTS = 	$(CFILES:.cpp=.o)
 
