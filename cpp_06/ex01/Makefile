@@ -1,7 +1,7 @@
 NAME = Serialize
 
-//CC =  c++-12 #ecole
-CC = g++ #maison
+CC =  c++ #ecole
+//CC = g++ #maison
 
 RM = 		@rm -rf
 
