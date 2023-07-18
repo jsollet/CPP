@@ -8,6 +8,7 @@ RM = 		@rm -rf
 FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic # -fsanitize=address
 
 CFILES =	main.cpp \
+			BitcoinExchange.cpp \
 			
 
 OBJECTS = 	$(CFILES:.cpp=.o)

@@ -1,4 +1,4 @@
-NAME = Easyfind
+NAME = PmergeMe
 
 CC =  c++ #ecole
 
@@ -8,7 +8,7 @@ RM = 		@rm -rf
 FLAGS = -g -Wall -Werror -Wextra -std=c++98 -pedantic # -fsanitize=address
 
 CFILES =	main.cpp \
-			
+			PmergeMe.cpp \
 
 OBJECTS = 	$(CFILES:.cpp=.o)
 
