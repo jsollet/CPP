@@ -1,5 +1,5 @@
 #include "Zombie.hpp"
-// a modifier
+// 
 int main()
 {
 	Zombie zombie_1("Freddy");
